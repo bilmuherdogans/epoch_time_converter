@@ -1,0 +1,652 @@
+<html>
+	<head>
+	</head>
+	<link rel="stylesheet" type="text/css" href="index.css"/>
+<body>
+
+<div>
+
+
+<div>
+
+<script>
+
+function artikYillariBul(yil) // Bu fonksiyon yardımıyla artık yıl tesbiti yapıyoruz.
+{
+	var sonuc;
+ 	if((yil % 400 == 0) || ((yil % 4 == 0) && (yil % 100 != 0)))
+	{
+		
+		sonuc=1;
+	}
+	else
+	{
+		
+		sonuc=0;
+	}
+	return sonuc;
+}
+	
+/*Bu fonksiyon yardımıyla bilgisayarımızın şimdiki saati ile 1970 yılları arasındaki zamanı saniye cinsinden buluruz. */
+function epochZamaniniDondur() 
+{	
+	toplamSaniye=0;
+	for(i=1970;i<2018;i++)
+	{
+		if(artikYillariBul(i)===1)
+		{
+			toplamSaniye+=31622400;
+		}
+		else
+		{
+			toplamSaniye+=31536000;
+		}
+	}
+	
+	//yıl içerisinde geçtiğimiz aylara ait  zamanının saniye cinsinden toplamı , 
+	var zaman=new Date();	
+	for(i=0;i<zaman.getMonth();i++)
+	{
+		if( (i===0) ||(i===2) ||(i===4) ||(i===6) ||(i===7) ||(i===9) ||(i===11) )
+		{
+			toplamSaniye+=2678400;			
+		}
+		if( (i===3) ||(i===5) ||(i===8) ||(i===10))
+		{
+			toplamSaniye+=2592000;			
+		}
+		if(i===1)
+		{
+			toplamSaniye+=2419200;	
+		}
+	}
+	
+	//bulunduğumuz ay içerisinde geçtiğimiz günlere ait  zamanının saniye cinsinden toplamı , 
+	for(i=0;i<zaman.getDate();i++)
+	{
+		toplamSaniye+=86400;
+	}
+	
+	//bulunduğumuz gün içerisinde geçtiğimiz saatlere ait  zamanının saniye cinsinden toplamı , 
+	for(i=0;i<zaman.getHours();i++)
+	{
+		toplamSaniye+=3600;
+	}
+	
+	//bulunduğumuz saat içerisinde geçtiğimiz dakikalara ait saniyelerin toplamı
+	for(i=0;i<zaman.getMinutes();i++)
+	{
+		toplamSaniye+=60;
+	}
+	
+	//bulunduğumuz dakika içerisinde ki saniyelerin toplamı , 
+	for(i=0;i<=zaman.getSeconds();i++)
+	{
+		
+		toplamSaniye+=1;
+	
+	}
+
+	
+	var kopyalananZaman=toplamSaniye;
+	kopyalananZaman=kopyalananZaman+(9*60*60);
+	document.getElementById("epochSaatiKonumu").innerHTML=toplamSaniye;
+	
+	
+	//var yilHesabi=Math.floor((toplamSaniye/31536000))+1970;
+	//document.getElementById("epochSaatiKonumu").innerHTML=yilHesabi;
+	
+	//pm date type
+	var saniye=toplamSaniye%60;
+		toplamSaniye=toplamSaniye/60;
+		toplamSaniye=Math.floor(toplamSaniye);
+	
+	var dakika=Math.floor(toplamSaniye%60);
+		toplamSaniye=toplamSaniye/60;
+		toplamSaniye=Math.floor(toplamSaniye);
+	var saat=Math.floor(toplamSaniye%12);
+		toplamSaniye=toplamSaniye/12;
+		toplamSaniye=Math.floor(toplamSaniye);
+	
+	//Aylara ait isimlerin tutulduğu dizi.
+	var d=new Date();
+	var month=new Array();
+	month[0]="January";
+	month[1]="February";
+	month[2]="March";
+	month[3]="April";
+	month[4]="May";
+	month[5]="June";
+	month[6]="July";
+	month[7]="August";
+	month[8]="September";
+	month[9]="October";
+	month[10]="November";
+	month[11]="December";
+	var n=month[d.getMonth()];
+	
+	// Bulduğumuz pm değerini sayfadaki konumlarına yazdırdık.
+	document.getElementById("localTarih").innerHTML=n+"  "+zaman.getDate()+" "+zaman.getFullYear()+"  "+(saat)+" : "+dakika+" : " +saniye+" pm";
+ 
+	//am date type
+	var saniye1=kopyalananZaman%60;
+		kopyalananZaman=kopyalananZaman/60;
+		kopyalananZaman=Math.floor(kopyalananZaman);
+	
+	var dakika1=Math.floor(kopyalananZaman%60);
+		kopyalananZaman=kopyalananZaman/60;
+		kopyalananZaman=Math.floor(kopyalananZaman);
+	var saat1=Math.floor(kopyalananZaman%12);
+	
+	
+	
+	
+	//Bulduğumuz toplam saniyeye karşılık gelen am saat türündeki karşılığını bulduk.
+	document.getElementById("UTCTarih").innerHTML=n+"  "+zaman.getDate()+" "+zaman.getFullYear()+"  "+(saat1)+" : "+dakika1+" : " +saniye1+" am";
+	
+	
+	
+	
+	
+	
+	
+}
+
+	
+	//Zamanın 1sn aralıklarla güncellenmesini sağladık.
+    setInterval(epochZamaniniDondur,1000);	
+	
+    function epochDonustur()
+	{
+		var yeni=0;
+		var farklizaman=0;
+		var yeni=document.getElementById("alinanEpochDegeri").value;
+		
+		
+
+
+		//var yilHesabi=Math.floor((toplamSaniye/31536000))+1970;
+		//document.getElementById("epochSaatiKonumu").innerHTML=yilHesabi;
+
+		//pm date type
+		var saniye=yeni%60;
+			yeni=yeni/60;
+			yeni=Math.floor(yeni);
+
+		var dakika=yeni%60;
+			yeni=yeni/60;
+			yeni=Math.floor(yeni);
+		var saat=yeni%12;
+			yeni=yeni/12;
+			yeni=Math.floor(yeni);
+		
+		
+		document.getElementById("mesaj1").innerHTML=(saat)+" : "+dakika+" : " +saniye+" pm";
+		document.getElementById("mesaj2").innerHTML=(saat+9)%12+" : "+dakika+" : " +saniye+" am";
+		
+		
+
+	
+	}
+
+	
+	
+	
+	function convertMetodu()
+	{
+		var sure=0;
+		var c_yil=document.getElementById("yil").value;
+		var c_ay=document.getElementById("ay").value;
+		var c_gun=document.getElementById("gun").value;
+		var c_saat=document.getElementById("saat").value;
+		var c_dakika=document.getElementById("dakika").value;
+		var c_saniye=document.getElementById("saniye").value;
+		
+		for(i=1970;i<parseInt(c_yil);i++)
+		{
+			if(artikYillariBul(i)===1)
+			{
+				sure+=31622400;
+			}
+			else
+			{
+				sure+=31536000;
+			}
+		}
+	
+		
+		//combobox üzerinde bulunan zamana karşılık gelen ay numaralarını atadık.
+		var ayNo;
+		if(c_ay==("01 January"))
+		{
+		   ayNo=0;
+	    }
+		if(c_ay==("02 February"))
+		{
+		   ayNo=1;
+	    }
+		if(c_ay==("03 March"))
+		{
+		   ayNo=2;
+	    }
+		if(c_ay==("04 April"))
+		{
+		   ayNo=3;
+	    }
+		if(c_ay==("05 May"))
+		{
+		   ayNo=4;
+	    }
+		if(c_ay==("06 June"))
+		{
+		   ayNo=5;
+	    }
+		if(c_ay==("07 July"))
+		{
+		   ayNo=6;
+	    }
+		if(c_ay==("08 August"))
+		{
+		   ayNo=7;
+	    }
+		if(c_ay==("09 September"))
+		{
+		   ayNo=8;
+	    }
+		if(c_ay==("10 October"))
+		{
+		   ayNo=9;
+	    }
+		if(c_ay==("11 November"))
+		{
+		   ayNo=10;
+	    }
+		if(c_ay==("12 December"))
+		{
+		   ayNo=11;
+	    }
+	
+		for(i=0;i<ayNo;i++)
+		{
+			if( (i===0) ||(i===2) ||(i===4) ||(i===6) ||(i===7) ||(i===9) ||(i===11) )
+			{
+				sure+=2678400;			
+			}
+			if( (i===3) ||(i===5) ||(i===8) ||(i===10))
+			{
+				sure+=2592000;			
+			}
+			if(i===1)
+			{
+				sure+=2419200;	
+			}
+		}
+		
+		for(i=0;i<parseInt(c_gun);i++)
+		{
+			sure+=86400;
+		}
+		for(i=0;i<parseInt(c_saat);i++)
+		{
+			sure+=3600;
+		}
+		
+		for(i=0;i<parseInt(c_dakika);i++)
+		{
+			sure+=60;
+		}
+
+		//bulunduğumuz dakika içerisinde ki saniyelerin toplamı , 
+		for(i=0;i<=parseInt(c_saniye);i++)
+		{
+
+			sure+=1;
+
+		}
+		
+		
+		document.getElementById("sonucMesaji").innerHTML="Converted epoch timestamp in seconds : "+sure;
+	
+	
+	}
+	
+	
+	
+	
+</script>
+
+<div id="ortaBlok">
+	
+	<div id="epochAlani">
+			<div id="epochSaatiKonumu" align="center"></div>
+	</div>
+	<div id="localTarihAlani">
+			<div id="localTarih" align="center"></div>
+	</div>
+	<div id="UTCTarihAlani">
+			<div id="UTCTarih" ></div>
+	</div>
+		
+</div>	
+
+<div id="ortaBlok2">
+	
+	<div id="epochDonusturucu">
+	
+		<form action="index.html">
+			<table>
+			
+			<tr>
+				
+			<td> <input type="text" id="alinanEpochDegeri"></td>
+			<td><input type="button" id="buton_EpochtoHumanDate" onclick="epochDonustur();" value="Timestamp to Human date "></td>
+			<td><div id="mesaj1"></div></td>
+			<td><div id="mesaj2"></div></td>
+			</tr>
+			</table>
+		
+		
+		 
+	     
+		 
+		
+		</form>
+		
+		
+	</div>
+		
+</div>	
+<div id="altBlok">
+	
+	<div id="altBlokTarih" align="center">
+			<select id="yil">
+				
+				<option>1971</option>
+				<option>1972</option> 
+				<option>1973</option> 
+				<option>1974</option> 
+				<option>1975</option>
+				<option>1976</option> 
+				<option>1977</option> 
+				<option>1978</option> 
+				<option>1979</option> 
+				<option>1980</option> 
+				<option>1981</option> 
+				<option>1982</option> 
+				<option>1983</option> 
+				<option>1984</option> 
+				<option>1985</option> 
+				<option>1986</option> 
+				<option>1987</option> 
+				<option>1988</option> 
+				<option>1989</option> 
+				<option>1990</option> 
+				<option>1991</option> 
+				<option>1992</option> 
+				<option>1993</option> 
+				<option>1994</option> 
+				<option>1995</option> 
+				<option>1996</option> 
+				<option>1997</option> 
+				<option>1998</option> 
+				<option>1999</option> 
+				<option>2000</option> 
+				<option>2001</option> 
+				<option>2002</option> 
+				<option>2003</option> 
+				<option>2004</option> 
+				<option>2005</option> 
+				<option>2006</option> 
+				<option>2007</option> 
+				<option>2008</option> 
+				<option>2009</option> 
+				<option>2010</option> 
+				<option>2011</option> 
+				<option>2012</option> 
+				<option>2013</option> 
+				<option>2014</option> 
+				<option>2015</option> 
+				<option>2016</option> 
+				<option>2017</option>
+				<option>2018</option>
+				<option>2019</option>
+				<option>2020</option>
+				<option>2021</option>
+				<option>2022</option>
+				<option>2023</option>
+			</select>
+			<select id="ay">
+					
+					<option>01 January</option>
+					<option>02 February</option>
+					<option>03 March</option>
+					<option>04 April</option>
+					<option>05 May</option>
+					<option>06 June</option>
+					<option>07 July</option>	
+					<option>08 August</option>
+					<option>09 September</option>	
+					<option>10 October</option>
+				    <option>11 November</option>
+				    <option>12 December</option>
+				
+		
+			</select>
+			<select id="gun">
+		
+				<option>01</option>
+				<option>02</option>
+				<option>03</option>
+				<option>04</option>
+				<option>05</option>
+				<option>06</option>
+				<option>07</option>
+				<option>08</option>
+				<option>09</option>
+				<option>10</option>
+				<option>11</option>
+				<option>12</option>
+				<option>13</option>
+				<option>14</option>
+				<option>15</option>
+				<option>16</option>
+				<option>17</option>
+				<option>18</option>
+				<option>19</option>
+				<option>20</option>
+				<option>21</option>
+				<option>22</option>
+				<option>23</option>
+				<option>24</option>
+				<option>25</option>
+				<option>26</option>
+				<option>27</option>
+				<option>28</option>
+				<option>29</option>
+				<option>30</option>
+				<option>31</option>
+			
+		</select>	
+	
+			<select id="saat">
+		
+			<option>01</option>
+			<option>02</option>
+			<option>03</option>
+			<option>04</option>
+		
+			<option>05</option>
+			<option>06</option>
+			<option>07</option>
+			<option>08</option>
+			<option>09</option>
+			<option>10</option>
+			<option>11</option>
+			<option>12</option>
+			<option>13</option>
+			<option>14</option>
+			<option>15</option>
+			<option>16</option>
+			<option>17</option>
+			<option>18</option>
+			<option>19</option>
+			<option>20</option>
+			<option>21</option>
+			<option>22</option>
+			<option>23</option>
+			
+		</select>
+		
+		
+		
+		<select id="dakika">
+		
+		
+			<option>01</option>
+			<option>02</option>
+			<option>03</option>
+		
+			<option>04</option>
+			<option>05</option>
+			<option>06</option>
+			<option>07</option>
+			<option>08</option>
+			<option>09</option>
+			<option>10</option>
+			<option>11</option>
+			<option>12</option>
+			<option>13</option>
+			<option>14</option>
+			<option>15</option>
+			<option>16</option>
+			
+			
+			<option>17</option>
+			<option>18</option>
+			<option>19</option>
+			<option>20</option>
+		
+			<option>21</option>
+			<option>22</option>
+			<option>23</option>
+			<option>24</option>
+			<option>25</option>
+			<option>26</option>
+			<option>27</option>
+			<option>28</option>
+			<option>29</option>
+			<option>30</option>
+			<option>31</option>
+			<option>32</option>
+			<option>33</option>
+			<option>34</option>
+			<option>35</option>
+			<option>36</option>
+			<option>37</option>
+			<option>38</option>
+			<option>39</option>
+			<option>40</option>
+			<option>41</option>
+			<option>42</option>
+			<option>43</option>
+			<option>44</option>
+			<option>45</option>
+			<option>46</option>
+			<option>47</option>
+			<option>48</option>
+			<option>49</option>
+			<option>50</option>
+			<option>51</option>
+			<option>52</option>
+			<option>53</option>
+		
+			<option>54</option>
+			<option>55</option>
+			<option>56</option>
+			<option>57</option>
+			<option>58</option>
+			<option>59</option>
+		
+				
+		</select>
+		
+		<select id="saniye">
+		
+		
+			<option>01</option>
+			<option>02</option>
+			<option>03</option>
+		
+			<option>04</option>
+			<option>05</option>
+			<option>06</option>
+			<option>07</option>
+			<option>08</option>
+			<option>09</option>
+			<option>10</option>
+			<option>11</option>
+			<option>12</option>
+			<option>13</option>
+			<option>14</option>
+			<option>15</option>
+			<option>16</option>
+			
+			
+			<option>17</option>
+			<option>18</option>
+			<option>19</option>
+			<option>20</option>
+		
+			<option>21</option>
+			<option>22</option>
+			<option>23</option>
+			<option>24</option>
+			<option>25</option>
+			<option>26</option>
+			<option>27</option>
+			<option>28</option>
+			<option>29</option>
+			<option>30</option>
+			<option>31</option>
+			<option>32</option>
+			<option>33</option>
+			<option>34</option>
+			<option>35</option>
+			<option>36</option>
+			<option>37</option>
+			<option>38</option>
+			<option>39</option>
+			<option>40</option>
+			<option>41</option>
+			<option>42</option>
+			<option>43</option>
+			<option>44</option>
+			<option>45</option>
+			<option>46</option>
+			<option>47</option>
+			<option>48</option>
+			<option>49</option>			
+			<option>50</option>
+			<option>51</option>
+			<option>52</option>
+			<option>53</option>
+			<option>54</option>
+			<option>55</option>
+			<option>56</option>
+			<option>57</option>
+			<option>58</option>
+			<option>59</option>
+		</select>
+		
+	</div>
+		<form action="index.html" id="convertButon">
+		
+			<input type="button" value="Convert" onClick="convertMetodu()">
+		
+		</form>
+	<div id="sonucMesaji"></div>
+</div>	
+	
+	
+</body>
+</html>
