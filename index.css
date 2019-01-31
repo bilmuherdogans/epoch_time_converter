@@ -1,0 +1,162 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+#ortaBlok{
+	margin: 0 auto;
+	background-color: #6B6B6B;
+	width: 80%;
+	height: 30%;
+}
+#epochAlani{
+	width: 35%;
+	background-color: #6B6B6B;
+	height: 100%;
+	z-index: 1;
+	float: left;
+}
+#epochSaatiKonumu
+{
+	color: white;
+	font-family: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", "serif";
+	font-size: 20px;
+	margin: 0 auto;
+	padding-top: 100px;
+	padding-left: 150px;
+	position: fixed;
+}
+#localTarihAlani{
+	width: 35%;
+	background-color: #6B6B6B;
+	height: 100%;
+	
+	float:left;
+	
+	
+	
+}
+#localTarih
+{
+	color: white;
+	font-family: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", "serif";
+	font-size: 20px;
+	margin: 0 auto;
+	padding-top: 100px;
+	
+	position: fixed;
+	
+	
+}
+
+#UTCTarihAlani{
+	margin: 0 auto;
+	width: 30%;
+	background-color: #6B6B6B;
+	height: 100%;
+	
+	float:left;
+	
+	
+}
+#UTCTarih
+{
+	color: white;
+	font-family: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", "serif";
+	font-size: 20px;
+	margin: 0 auto;
+	padding-top: 100px;
+	
+	
+}
+
+#ortaBlok2{
+	margin: 0 auto;
+	background-color: #6B6B6B;
+	margin-top: 50px;
+	width: 80%;
+	height: 30%;
+	
+}
+
+#epochDonusturucu
+{
+	margin: 0 auto;
+	top:50px;
+	width: 60%;
+	height: 60%;
+	
+	top:55px;
+	position: relative;	
+}
+
+#alinanEpochDegeri
+{
+	margin-left: 20%;
+	margin-top: 30px;
+	width: 200px;
+	height: 40px;
+}
+#buton_EpochtoHumanDate
+{
+	
+	margin-top: 30px;
+	width: 100%;
+	height: 40px;
+}
+
+#mesaj1{
+	
+	width: 50%;
+	height: 30px;
+	
+	float: left;
+	position: absolute;
+	margin-top: 0px;
+	margin-left: 3px;
+	font-family: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", "serif";
+	font-size: 16px;
+	color: white;
+
+}
+#mesaj2{
+	width: 50%;
+	height: 30px;
+	
+	float: left;
+	position: absolute;
+	margin-top: 40px;
+	font-family: Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", "serif";
+	font-size: 16px;
+	color: white;
+
+	
+}
+#altBlok{
+	
+	margin: 0 auto;
+	background-color: #6B6B6B;
+	margin-top: 50px;
+	width: 80%;
+	height: 20%;
+}
+#altBlokTarih
+{
+	margin: 0 auto;
+	margin-top: 50px;
+	position: absolute;
+	margin-left: 18%;
+}
+#convertButon
+{
+	margin: 0 auto;
+	margin-top: 48px;
+	position: absolute;
+	margin-left: 40%;
+}
+#sonucMesaji
+{
+	position: absolute;
+	padding-top: 30px;
+	padding-left: 46%;
+	
+}
